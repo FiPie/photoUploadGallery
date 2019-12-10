@@ -1,0 +1,32 @@
+html,
+body {
+    height: 100vh;
+    font-family: sans-serif;
+    font-size: 1em;
+    background: #007bff;
+    background: linear-gradient(to right, #0062E6, #33AEFF);
+
+}
+.fluid-container {
+  overflow: hidden;
+  margin: auto;
+}
+ h2 {
+   text-align: center;
+ }
+ .pager {
+   text-align: center;
+ }
+.pagerButtons {
+  display: inline;
+}
+.buttons {
+  margin: auto;
+  text-align: center;
+}
+.file-upload input[type='file'] {
+  display: none;
+}
+.rounded-lg {
+  border-radius: 1rem;
+}
