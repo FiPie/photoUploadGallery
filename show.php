@@ -15,23 +15,40 @@
     </head>
     <body>
 
-        <h2>jQuery driven phenomenal image slider 2.0 </h2>
+      <div class="container">
 
-        <div class="fluid-container">
-            <div class="images"></div>
+        <div class="row mt-3 pt-3 text-justify text-white">
+          <div class="col-md-10 col-sm-11 col-xs-12 mx-auto px-0">
+            <h2 class="display-5">jQuery driven phenomenal image slider 2.0 </h2>
+            <p class="text-center"> This is a text sample to check the aligning bootstrap classes</p>
+          </div>
         </div>
 
-        <div class="pager">
-            <ul class="pagerList"></ul>
+        <div class="row">
+          <div class="col-md-10 col-sm-11 col-xs-12 mx-auto px-0 slider-container">
+            <div class="images">
+            </div>
+            <div class="btn-toolbar toolbar-fixed-bottom toolbar-container mx-auto">
+              <div class="btn-group">
+                <button id="play" class="btn btn-lg"> <i class="toolicons fas fa-play"></i> </button>
+                <button id="stop" class="btn btn-lg"> <i class="toolicons fas fa-pause"></i> </button>
+                <button id="prev" class="btn btn-lg"> <i class="toolicons fas fa-chevron-left"></i> </button>
+                <button id="next" class="btn btn-lg"> <i class="toolicons fas fa-chevron-right"></i> </button>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="buttons">
-            <button id="play">Play</button>
-            <button id="stop">Stop</button>
-            <button id="prev">Prev</button>
-            <button id="next">Next</button>
+        <div class="row">
+          <div class="col-md-10 col-sm-11 col-xs-12 mx-auto px-0 pagination-container">
+            <nav class="" aria-label="Page navigation">
+              <ul class="row pagination pagination-sm justify-content-center mx-0 pagerList">
+              </ul>
+            </nav>
+          </div>
         </div>
 
+      </div>
 
 
         <script type="text/javascript">
@@ -40,6 +57,8 @@
             imageArray.splice(0, 2);
             console.log(imageArray);
         </script>
+
         <script src="js/slider.js"></script>
+
     </body>
 </html>

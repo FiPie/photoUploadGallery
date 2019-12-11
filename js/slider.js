@@ -1,49 +1,71 @@
 var images = imageArray;
 //console.log(images);
 var current = 0;
-var imageWidth, imageHeight, timeout, imageRatio, nextImg, allImagesWidth;
-
+var imageWidth, imageHeight, timeout, allImagesWidth;
 
 //Onload initial setup
 $(function() {
-  //Initial normalized image width of approximately 49.5% of the user view port width
-  imageWidth = 49.5;
-  $('body').append("<img class='rounded' id='sampleImg' src='images/" + images[0] + "'>");
-  //The first image sets the height standard for the other images
-  $('#sampleImg').width(imageWidth + 'vw');
-  $('#sampleImg').on('load', function() {
-    imageWidth = $('#sampleImg').width();
-    imageHeight = $('#sampleImg').height();
-    console.log('sample imageWidth:'+imageWidth);
-    allImagesWidth = ((imageWidth * images.length)+(1));
-    console.log('allImagesWidth: '+allImagesWidth);
-    //After setting the standards, the sample image is removed
-    $('#sampleImg').remove();
-    //Next we're loading all the images
-    loadImages();
+
+  //Initial setup of images size
+  setImagesSize();
+  //Next we're loading all the images
+  loadImages();
+  //The slider will adjust its size to the window resizing event
+  $(window).resize(function() {
+    setImagesSize();
   });
 });
 
+function setImagesSize() {
+  //Attempt to fastforward the current animation (if running) to it's next complete step and then continues
+  if ($('.images').is(':animated')) {
+    console.log('.images is animated');
+    $('.images').stop(true, true);
+  }
+
+  //Normalized images width equal to the column element width
+  imageWidth = $('.slider-container').width();
+  $('.images').append("<img id='sampleImg' src='images/" + images[0] + "'>");
+  //The sample image sets the height standard for the other images
+  $('#sampleImg').width(imageWidth);
+  $('#sampleImg').on('load', function() {
+    imageWidth = $('#sampleImg').width();
+    imageHeight = $('#sampleImg').height();
+    allImagesWidth = ((imageWidth * images.length));
+    //Styling of the image slider elements
+    $('.slider-container').css({
+      'width': imageWidth,
+      'height': imageHeight
+    });
+    $('.pagination-container').css({
+      'width': imageWidth
+    });
+    $('.images').css({
+      'width': allImagesWidth,
+      'height': imageHeight
+    });
+    $('.image').css({
+      'width': imageWidth,
+      'height': imageHeight
+    });
+    //After setting the standards, the sample image is removed
+    $('#sampleImg').remove();
+  });
+  //This beautiful line of code below will make the resizing of the currently displayed image (animated or not) keep up with the window resizing event, even if caught in the middle of the animation
+  $('.images').css({
+    'margin-left': -(current * imageWidth)
+  });
+}
+
 function loadImages() {
   for (var i = 0; i < images.length; i++) {
+    // Produces the img elements with sources pointing to the images
     var img = "<img class='image rounded' id='i" + (i + 1) + "' src='images/" + images[i] + "'>";
     $('.images').append(img);
-    var li = "<li class='pagerButtons'><button onclick='goToPage(" + i + ")'>" + (i + 1) + "</button></li>";
+    // Produces the pagination buttons to the coresponding images
+    var li = "<li id='" + (i + 1) + "' class='page-item col-sm-0.5 col-xs-0.25'><a class='page-link' onclick='goToPage(" + i + ")'>" + (i + 1) + "</a></li>";
     $('.pagerList').append(li);
   }
-  //Styling of the image slider elements
-  $('.fluid-container').css({
-    'width': imageWidth,
-    'height': imageHeight
-  });
-  $('.images').css({
-    'width': allImagesWidth,
-    'height': imageHeight
-  });
-  $('.image').css({
-    'width': imageWidth,
-    'height': imageHeight
-  });
 
   //Initial configuration of button events
   $('#stop').prop('disabled', true);
@@ -51,12 +73,14 @@ function loadImages() {
   $('#play').on('click', play);
   $('#prev').on('click', prev);
   $('#next').on('click', next);
-  //play();
+  $('#1').addClass('activated');
 }
 
 function prev() {
   current = (current - 1 + images.length) % images.length;
   console.log('prev() current:' + current);
+  $('.activated').removeClass('activated');
+  $('#' + (current + 1)).addClass('activated');
   $('.images').animate({
     'margin-left': -(current * imageWidth)
   }, 800, 'swing');
@@ -65,8 +89,8 @@ function prev() {
 function next() {
   current = (current + 1 + images.length) % images.length;
   console.log('next() current:' + current);
-  console.log('next() -(current * imageWidth):' + (current * imageWidth));
-  console.log('next() current image width):' + $('#i'+(current+1)).width());
+  $('.activated').removeClass('activated');
+  $('#' + (current + 1)).addClass('activated');
   $('.images').animate({
     'margin-left': -(current * imageWidth)
   }, 800, 'swing');
@@ -79,11 +103,11 @@ function play() {
   $('#play').off();
   $('#stop').off();
 
-  $('#stop').on('click', stop);
+  $('#stop').on('click', pause);
   timeout = setInterval('next()', 2000);
 }
 
-function stop() {
+function pause() {
   $('.images').stop(true, true);
   $('#stop').off();
   $('#stop').prop('disabled', true);
@@ -99,6 +123,8 @@ function goToPage(number) {
   $('.images').stop(true, true);
   $('.images').animate({
     'margin-left': -(current * imageWidth)
-  }, 800, 'swing');
+  }, 600, 'swing');
+  $('.activated').removeClass('activated');
+  $('#' + (current + 1)).addClass('activated');
   console.log('goToPage() current=' + current);
 };
