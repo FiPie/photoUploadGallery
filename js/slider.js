@@ -119,6 +119,7 @@ function pause() {
 }
 
 function goToPage(number) {
+  $('#stop').trigger('click');
   current = number;
   $('.images').stop(true, true);
   $('.images').animate({
@@ -127,4 +128,8 @@ function goToPage(number) {
   $('.activated').removeClass('activated');
   $('#' + (current + 1)).addClass('activated');
   console.log('goToPage() current=' + current);
+  setTimeout(function() {
+    $('#play').trigger('click');
+  }, 2000);
+
 };
