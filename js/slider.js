@@ -1,7 +1,7 @@
 var images = imageArray;
 //console.log(images);
 var current = 0;
-var imageWidth, imageHeight, timeout, allImagesWidth;
+var imageWidth, imageHeight, timeout, allImagesWidth, isRunning;
 
 //Onload initial setup
 $(function() {
@@ -76,7 +76,15 @@ function loadImages() {
   $('#1').addClass('activated');
 }
 
-function prev() {
+function prev(event) {
+  //Detects the cause of function call, if it's due to the user's 'click' and the animation is running => the animation pauses for 3 secs
+  if (event && isRunning === 1) {
+    console.log('next() click event! & animation is running');
+    $('#stop').trigger('click');
+    setTimeout(function() {
+      $('#play').trigger('click');
+    }, 3000);
+  }
   current = (current - 1 + images.length) % images.length;
   console.log('prev() current:' + current);
   $('.activated').removeClass('activated');
@@ -86,7 +94,15 @@ function prev() {
   }, 800, 'swing');
 }
 
-function next() {
+function next(event) {
+  //Detects the cause of function call, if it's due to the user's 'click' and the animation is running => the animation pauses for 3 secs
+  if (event && isRunning === 1) {
+    console.log('next() click event! & animation is running');
+    $('#stop').trigger('click');
+    setTimeout(function() {
+      $('#play').trigger('click');
+    }, 3000);
+  }
   current = (current + 1 + images.length) % images.length;
   console.log('next() current:' + current);
   $('.activated').removeClass('activated');
@@ -97,6 +113,7 @@ function next() {
 }
 
 function play() {
+  isRunning = 1;
   $('.images').stop(true, true);
   $('#play').prop('disabled', true);
   $('#stop').prop('disabled', false);
@@ -108,6 +125,7 @@ function play() {
 }
 
 function pause() {
+  isRunning = 0;
   $('.images').stop(true, true);
   $('#stop').off();
   $('#stop').prop('disabled', true);
@@ -119,7 +137,13 @@ function pause() {
 }
 
 function goToPage(number) {
-  $('#stop').trigger('click');
+  var wasRunning = 0;
+  //If the animation was running when this function was called, the animation will be paused for 3 seconds before restarting
+  if ($('.images').is(':animated') || isRunning === 1) {
+    wasRunning = 1;
+    console.log('element .images is animated');
+    $('#stop').trigger('click');
+  }
   current = number;
   $('.images').stop(true, true);
   $('.images').animate({
@@ -128,8 +152,10 @@ function goToPage(number) {
   $('.activated').removeClass('activated');
   $('#' + (current + 1)).addClass('activated');
   console.log('goToPage() current=' + current);
-  setTimeout(function() {
-    $('#play').trigger('click');
-  }, 2000);
-
+  if (wasRunning === 1) {
+    //Restarting the animation after 3 seconds by triggering the 'click' event which calls the play() function
+    setTimeout(function() {
+      $('#play').trigger('click');
+    }, 3000);
+  }
 };
