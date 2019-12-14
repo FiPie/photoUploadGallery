@@ -1,8 +1,14 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 
-<html>
+<html lang="en" dir="ltr">
     <head>
         <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="Description" content="Author: F.Piechowiak, Category: Web Aplication">
         <title>Upload File</title>
         <!-- Jquery -->
         <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
@@ -17,59 +23,82 @@
     <body>
 
         <form enctype="multipart/form-data" action="save.php" method="POST">
-            <div class="container p-5 mt-5 mb-5"> 
+            <div class="container p-5 my-5">
 
-                <div class="row mt-5 px-5 text-center text-white">
+                <div class="row mt-1 px-5 text-center" style='max-height: 30px'>
+                    <div id="message" class="col-sm-10 py-3 mb-5 mx-auto alert alert-<?= $_SESSION['msg_type'] ?>">
+                        <?php
+                        echo $_SESSION["promptMessage"];
+
+                        if (isset($_SESSION["promptMessage"])) {
+                            echo ("<button class='close' onclick='cleanMsg(`" . $_SESSION['msg_type'] . "`)'><span>&times;</span></button>");
+                        }
+                        unset($_SESSION["promptMessage"]);
+                        unset($_SESSION["msg_type"]);
+                        ?>
+                    </div>
+                </div>
+
+
+                <div class="row mt-1 px-5 text-center text-white">
                     <div class="col-lg-5 md-6 mx-auto">
                         <h1 class="display-4">Photo Upload Gallery</h1>
                     </div>
                 </div>
 
                 <div class="row">
-                    <div class="col-lg-5  mx-auto">
+                    <div class="col-lg-6  mx-auto">
                         <div class="p-5 bg-white shadow rounded-lg">
-                            
-                            <p class="my-1 text-center lead">
-                                <span style="font-size: 2em; color: #582529;">
-                                    <i class="fas fa-user-astronaut lg mr-2"></i>
-                                </span> 
-                                Howdy there Space Cat. 
-                            </p>
-                            
+                            <div class="spacemanContainer text-nowrap">
+                                <p class="my-1 text-center">
+                                    <span id="spacemanIcon">
+                                        <i class="fas fa-user-astronaut lg mr-2"></i>
+                                    </span>
+                                    <span class="align-top p-3" id="talkbubble">Howdy there <strong>Space Cat.</strong> I sense You'd like to upload some photos, right?
+                                    </span>
+                                </p>
+                            </div>
                             <div class="py-4 text-center">
                                 <i class="fas fa-cloud-upload-alt" style="font-size: 6em; color: lightskyblue;"></i>
                             </div>
 
-                            <input type="hidden" name="MAX_FILE_SIZE" value="10000000">
-                            
+<!--                            <input type="hidden" name="MAX_FILE_SIZE" value="1000000">-->
+
                             <p class="mt-3 text-center small">
                                 Simply browse through your files, choose the photos you want to see in the slider
                                 gallery...
                             </p>
-                            
+
                             <div class="">
-                                <label for="fileUpload" class="file-upload btn btn-lg btn-primary btn-block rounded-pill shadow">
+                                <div class="custom-file overflow-hidden rounded-pill mb-2">
+                                    <input id="fileInput" type="file" name="file" class="custom-file-input rounded-pill">
+                                    <label for="fileInput" class="custom-file-label rounded-pill">Choose file</label>
+                                </div>
+                                <!--<label for="fileUpload" class="file-upload btn btn-lg btn-primary btn-block rounded-pill shadow">
                                     <i class="fa fa-upload mr-2"></i>Browse for file ...
                                     <input id="fileUpload" type="file" name="file" >
-                                </label>
+                                </label>-->
                             </div>
-                            
+
                             <p class="mt-5 text-center small">
                                 ...and click the <b>Upload Photo</b> button. You may then display your photos by
-                                clicking on <br><b>See Images</b> button. 
+                                clicking on <br><b>See Images</b> button.
                             </p>
-                            
+
                             <div class="btn-group d-flex pb-3">
-                                <input class="btn btn-success rounded-pill shadow" type="submit" value="Upload Photo">
-                                <a class="btn btn-primary rounded-pill shadow" href="show.php">
+                                <button class="btn btn-success rounded-pill shadow" type="submit" style="width: 49%">
+                                    <i class="fa fa-upload mr-2"></i>Upload Photo
+                                </button>&nbsp;
+                                <a class="btn btn-primary rounded-pill shadow" href="show.php" style="width: 49%">
                                     <i class="fas fa-eye"></i> See images
                                 </a>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
             </div>
         </form>
+        <script src="js/fileUpload.js"></script>
     </body>
 </html>
