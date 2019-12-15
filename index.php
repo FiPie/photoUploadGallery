@@ -23,9 +23,9 @@ session_start();
     <body>
 
         <form enctype="multipart/form-data" action="save.php" method="POST">
-            <div class="container p-5 my-5">
+            <div class="container p-5 my-5"> 
 
-                <div class="row mt-1 px-5 text-center" style='max-height: 30px'>
+                <div class="row mt-1 px-5 text-center" style="max-height: 30px">
                     <div id="message" class="col-sm-10 py-3 mb-5 mx-auto alert alert-<?= $_SESSION['msg_type'] ?>">
                         <?php
                         echo $_SESSION["promptMessage"];
@@ -53,9 +53,9 @@ session_start();
                                 <p class="my-1 text-center">
                                     <span id="spacemanIcon">
                                         <i class="fas fa-user-astronaut lg mr-2"></i>
-                                    </span>
+                                    </span> 
                                     <span class="align-top p-3" id="talkbubble">Howdy there <strong>Space Cat.</strong> I sense You'd like to upload some photos, right?
-                                    </span>
+                                    </span> 
                                 </p>
                             </div>
                             <div class="py-4 text-center">
@@ -82,14 +82,14 @@ session_start();
 
                             <p class="mt-5 text-center small">
                                 ...and click the <b>Upload Photo</b> button. You may then display your photos by
-                                clicking on <br><b>See Images</b> button.
+                                clicking on <br><b>See Images</b> button. 
                             </p>
 
                             <div class="btn-group d-flex pb-3">
                                 <button class="btn btn-success rounded-pill shadow" type="submit" style="width: 49%">
                                     <i class="fa fa-upload mr-2"></i>Upload Photo
                                 </button>&nbsp;
-                                <a class="btn btn-primary rounded-pill shadow" href="show.php" style="width: 49%">
+                                <a class="btn btn-primary rounded-pill shadow" href="views/show.php" style="width: 49%">
                                     <i class="fas fa-eye"></i> See images
                                 </a>
                             </div>
