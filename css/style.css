@@ -80,7 +80,7 @@ h2 {
 
 .spacemanContainer {
     overflow: visible;
-    /*    position: relative;
+    /*    position: relative; 
         float: left;*/
     display: inline-block;
 }
@@ -110,4 +110,22 @@ h2 {
     border-top: 15px solid transparent;
     border-right: 20px solid yellowgreen;
     border-bottom: 0px solid transparent;
+}
+
+#sticky-footer {
+    flex-shrink: 0;   
+}
+
+.page-content {
+    flex: 1 0 auto;
+}
+nav {
+    width: 100%;
+    text-align: center;
+    line-height: 2em;
+}
+nav a {
+    font-size: 1.25em;
+    opacity: 0.6;
+    font-weight: lighter;
 }

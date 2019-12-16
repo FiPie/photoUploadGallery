@@ -20,31 +20,48 @@ session_start();
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
         <link rel="stylesheet" href="../css/style.css">
     </head>
-    <body>
-        <?php
-        // put your code here
-        ?>
-        <!-- Page Content -->
-        <div class="container">
+    <body class="d-flex flex-column">
 
-            <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Thumbnail Gallery</h1>
+        <div class="page-content">
+            <?php include $_SERVER['DOCUMENT_ROOT'] . "/photoUploadGallery/fragments/menu.php"; ?>
 
-            <hr class="mt-2 mb-5">
+            <div class="container">
 
-            <div class="images row text-center text-lg-left">    
-                <!--<div class="col-lg-3 col-md-4 col-6">
-                    <a href="#" class="d-block mb-4 h-100">
-                        <img class="img-fluid img-thumbnail" src="" alt="">
-                    </a>
-                    
-                </div>-->
+                <div class="row mt-1 px-5 text-center" style="max-height: 30px">
+                    <div id="message" class="col-sm-10 py-3 mb-5 mx-auto alert alert-<?= $_SESSION['msg_type'] ?>">
+                        <?php
+                        echo $_SESSION["promptMessage"];
+
+                        if (isset($_SESSION["promptMessage"])) {
+                            echo ("<button class='close' onclick='cleanMsg(`" . $_SESSION['msg_type'] . "`)'><span>&times;</span></button>");
+                        }
+                        unset($_SESSION["promptMessage"]);
+                        unset($_SESSION["msg_type"]);
+                        ?>
+                    </div>
+                </div>
+
+                <h1 class="font-weight-light text-center text-lg-left mt-4 mb-0">Thumbnail Gallery</h1>
+
+                <div class="text-right">
+                    <span>
+                        <button class="btn btn-lg rounded-pill my-0 py-0" id="showOptions" onclick="showOptions()">
+                            <i class="fas fa-wrench"></i>
+                        </button>
+                    </span>
+                </div>
+
+                <hr class="mt-2 mb-5">
+
+                <div class="images row text-center text-lg-left">    
+                    <!--The images will be loaded here-->
+                </div>
 
             </div>
-
         </div>
-
     </div>
-    <!-- /.container -->
+
+    <?php include $_SERVER['DOCUMENT_ROOT'] . "/photoUploadGallery/fragments/footer.php"; ?>
 
     <script type="text/javascript">
         //Here I pass an array of file names in a variable obtained by PHP in JSON format to an external javascript file.

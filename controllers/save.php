@@ -7,7 +7,7 @@ if($_FILES['file']['size'] > $maxSize) {
     $message = "file size is too large. The maximum file size is <b>".($maxSize/1000000)."MB</b>!";
     $_SESSION["promptMessage"] = $message;
     $_SESSION["msg_type"] = "warning";
-    die(header('Location: index.php'));
+    die(header('Location: ../index.php'));
 }
 
 $types = ['image/png', 'image/jpeg', 'image/bmp', 'image/gif'];
@@ -16,25 +16,28 @@ if($temp_name == ''){
     $message = "No file has been selected!";
     $_SESSION["promptMessage"] = $message;
     $_SESSION["msg_type"] = "danger";
-    die(header('Location: index.php'));
+    die(header('Location: ../index.php'));
 }
 $mimeType = mime_content_type($temp_name);
 
 
 if ($temp_name != '' && in_array($mimeType, $types)) {
     $ext = pathinfo($_FILES['file']['name'], PATHINFO_EXTENSION);
-    $name = md5($_FILES['file']['name']) . ".$ext";
-    $dest = "./images/" . $name;
+    $original = $_FILES['file']['name'];
+    // NOTE: the obfuscated file name would still be visible to a malicious user in the Gallery view for example
+    $salt = str_shuffle("saltSALTsalt".rand(-27, 29)."moreSALTsAlT".rand(-27, 29));
+    $name = md5($original.$salt) . ".$ext";
+    $dest = "../images/" . $name;
     move_uploaded_file($temp_name, $dest);
-    $message = "The image file was successfully uploaded!";
+    $message = "The <b>$original </b> image file was successfully uploaded to Gallery!";
     $_SESSION["promptMessage"] = $message;
     $_SESSION["msg_type"] = "success";
 } else {
-    $message = "Selected file type is not allowed! Make sure you choose image";
+    $message = "Selected file type is not allowed! Make sure you choose image file";
     $_SESSION["promptMessage"] = $message;
     $_SESSION["msg_type"] = "danger";
-    die(header('Location: index.php'));
+    die(header('Location: ../index.php'));
 }
 
 
-header('Location: index.php');
+header('Location: ../index.php');
