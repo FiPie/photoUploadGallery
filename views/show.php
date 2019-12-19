@@ -16,7 +16,7 @@
     <body class="d-flex flex-column">
 
         <div class="page-content">
-            <?php include $_SERVER['DOCUMENT_ROOT'] . "/photoUploadGallery/fragments/menu.php"; ?>
+            <?php include "../fragments/menu.php"; ?>
             <div class="container">
 
                 <div class="row mt-3 pt-3 text-justify text-white">
@@ -53,7 +53,7 @@
             </div>
         </div>
         
-        <?php include $_SERVER['DOCUMENT_ROOT']."/photoUploadGallery/fragments/footer.php"; ?>
+        <?php include "../fragments/footer.php"; ?>
         
         <script type="text/javascript">
             //Here I pass an array of file names in a variable obtained by PHP in JSON format to an external javascript file.

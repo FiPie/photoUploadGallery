@@ -6,3 +6,4 @@
     </div>
   </footer>
 <script src="/photoUploadGallery/js/menu.js"  type="text/javascript" charset="utf-8"></script>
+

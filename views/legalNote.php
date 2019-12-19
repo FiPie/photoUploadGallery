@@ -21,7 +21,7 @@ session_start();
     </head>
     <body class="d-flex flex-column">
         <div class="page-content">
-            <?php include $_SERVER['DOCUMENT_ROOT'] . "/photoUploadGallery/fragments/menu.php"; ?>
+            <?php include "../fragments/menu.php"; ?>
             <div class="container">
                 <div class='row mt-5 px-5 text-center text-white'>
                     <div class="col-lg-10 md-11 mx-auto">
@@ -51,6 +51,6 @@ session_start();
             </div>
         </div>
 
-        <?php include $_SERVER['DOCUMENT_ROOT'] . "/photoUploadGallery/fragments/footer.php"; ?>  
+        <?php include "../fragments/footer.php"; ?>  
     </body>
 </html>
