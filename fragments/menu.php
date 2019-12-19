@@ -2,7 +2,9 @@
 $serverName = $_SERVER['SERVER_NAME'];
 $uri = $_SERVER['REQUEST_URI'];
 $base = $serverName . $uri;
-$webRoot = substr($base, 0, 39);
+$end = strpos($base, "photoUploadGallery");
+echo 'end : '.$end;
+$webRoot = (substr($base, 0, $end))."photoUploadGallery/";
 define(SITE_URL, $webRoot);
 // Here I am displaying all the variables obtained step by step. So far so good.               
 echo '$serverName = <b>' . $serverName . '</b><br>';    //output:  localhost
