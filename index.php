@@ -1,7 +1,5 @@
 <?php
 session_start();
-
-
 ?>
 <!DOCTYPE html>
 
@@ -25,9 +23,9 @@ session_start();
     <body class="d-flex flex-column">
         <div class="page-content">
 
-            <?php include "fragments/menu.php"; ?>
+            <?php require_once 'fragments/menu.php'; ?>
 
-            <div class="container px-5 pt-4 pb-5 mt-2">
+            <div class="container px-5 pt-4 pb-5 mt-2"> 
                 <form enctype="multipart/form-data" action="controllers/save.php" method="POST">
                     <div class="row mt-1 px-5 text-center" style="max-height: 30px">
                         <div id="message" class="col-sm-10 py-3 mb-5 mx-auto alert alert-<?= $_SESSION['msg_type'] ?>">
@@ -35,7 +33,7 @@ session_start();
                             echo $_SESSION["promptMessage"];
 
                             if (isset($_SESSION["promptMessage"])) {
-                                echo("<button class='close' onclick='cleanMsg(`" . $_SESSION['msg_type'] . "`)'><span>&times;</span></button>");
+                                echo ("<button class='close' onclick='cleanMsg(`" . $_SESSION['msg_type'] . "`)'><span>&times;</span></button>");
                             }
                             unset($_SESSION["promptMessage"]);
                             unset($_SESSION["msg_type"]);
@@ -46,7 +44,7 @@ session_start();
 
                     <div class="row mt-1 px-5 text-center text-white">
                         <div class="col-lg-5 md-6 mx-auto">
-                            <h1 class="display-4">Photo Upload Gallery  </h1>
+                            <h1 class="display-4">Photo Upload Gallery </h1>
                         </div>
                     </div>
 
@@ -57,10 +55,10 @@ session_start();
                                     <p class="my-1 text-center">
                                         <span id="spacemanIcon">
                                             <i class="fas fa-user-astronaut lg mr-2"></i>
-                                        </span>
+                                        </span> 
                                         <span class="align-top p-3" id="talkbubble">
                                             Howdy there <strong>Space Cat.</strong> I sense You'd like to upload some photos, right?
-                                        </span>
+                                        </span> 
                                     </p>
                                 </div>
                                 <div class="py-4 text-center">
@@ -83,7 +81,7 @@ session_start();
 
                                 <p class="mt-5 text-center small">
                                     ...and click the <b>Upload Photo</b> button. You may then display your photos by
-                                    clicking on <br><b>See Images</b> button.
+                                    clicking on <br><b>See Images</b> button. 
                                 </p>
 
                                 <div class="btn-group d-flex pb-3">
@@ -104,5 +102,7 @@ session_start();
         </div>
         <?php include "fragments/footer.php"; ?>
         <script src="js/fileUpload.js"></script>
+
+<!--        <script src="js/menu.js"  type="text/javascript" charset="utf-8"></script>-->
     </body>
 </html>

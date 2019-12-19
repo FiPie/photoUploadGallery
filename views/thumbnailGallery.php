@@ -59,16 +59,15 @@ session_start();
 
             </div>
         </div>
-    </div>
 
-    <?php include "../fragments/footer.php"; ?>
+        <?php include "../fragments/footer.php"; ?>
 
-    <script type="text/javascript">
-        //Here I pass an array of file names in a variable obtained by PHP in JSON format to an external javascript file.
-        var imageArray = <?php echo json_encode(scandir("../images/")); ?>;
-        imageArray.splice(0, 2);
-        console.log("imageArray : " + imageArray);
-    </script>
-    <script src="../js/fileDelete.js"></script>
-</body>
+        <script type="text/javascript">
+            //Here I pass an array of file names in a variable obtained by PHP in JSON format to an external javascript file.
+            var imageArray = <?php echo json_encode(scandir("../images/")); ?>;
+            imageArray.splice(0, 2);
+            console.log("imageArray : " + imageArray);
+        </script>
+        <script src="../js/fileDelete.js"></script>
+    </body>
 </html>

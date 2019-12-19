@@ -52,5 +52,6 @@ session_start();
         </div>
 
         <?php include "../fragments/footer.php"; ?>  
+        
     </body>
 </html>
