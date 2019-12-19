@@ -30,9 +30,9 @@ session_start();
                 <div class="row mt-1 px-5 text-center" style="max-height: 30px">
                     <div id="message" class="col-sm-10 py-3 mb-5 mx-auto alert alert-<?= $_SESSION['msg_type'] ?>">
                         <?php
-                        echo $_SESSION["promptMessage"];
-
+                       
                         if (isset($_SESSION["promptMessage"])) {
+                            echo $_SESSION["promptMessage"];
                             echo ("<button class='close' onclick='cleanMsg(`" . $_SESSION['msg_type'] . "`)'><span>&times;</span></button>");
                         }
                         unset($_SESSION["promptMessage"]);
