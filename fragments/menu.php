@@ -4,7 +4,7 @@ $uri = $_SERVER['REQUEST_URI'];
 $base = $serverName . $uri;
 $end = strpos($base, "photoUploadGallery");
 $webRoot = "http://".(substr($base, 0, $end)) . "photoUploadGallery/";
-define(SITE_URL, $webRoot);
+define('SITE_URL', $webRoot);
 ?>
 
 
