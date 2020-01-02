@@ -4,9 +4,16 @@ $uri = $_SERVER['REQUEST_URI'];
 $base = $serverName . $uri;
 $menuPathArray = explode("/", __FILE__);
 $projectFolderName = $menuPathArray[count($menuPathArray) - 3];
-$end = strpos($base, $projectFolderName);
-$webRoot = "http://" . (substr($base, 0, $end)) . $projectFolderName . "/";
+$end = strrpos($base, "/".$projectFolderName."/");
+$webRoot = "http://" . (substr($base, 0, $end+1)) . $projectFolderName . "/";
 define('SITE_URL', $webRoot);
+//echo $serverName."<br>";
+//echo $uri."<br>";
+//echo $base."<br>";
+//echo implode(" ", $menuPathArray)."<br>" ;
+//echo $projectFolderName."<br>";
+//echo $end."<br>";
+//echo $webRoot."<br>";
 ?>
 
 

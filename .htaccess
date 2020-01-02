@@ -1,0 +1,8 @@
+Options +FollowSymLinks
+RewriteEngine on
+#RewriteBase /
+#RewriteCond %{HTTP_HOST} ^photoUploadGallery$ [NC,OR]
+#RewriteCond %{HTTP_HOST} ^www.photoUploadGallery$
+#RewriteCond %{REQUEST_URI} !photoUploadGallery/
+#RewriteRule (.*) /photoUploadGallery/$1 [L]
+RewriteRule ^index$ index.php [NC]
