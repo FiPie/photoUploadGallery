@@ -6,23 +6,14 @@ $uriCheck= explode("/", $uri);
 $menuPathArray = explode("/", __FILE__);
 $projectFolderName = $menuPathArray[count($menuPathArray) - 3];
 $end = strrpos($base, "/".$projectFolderName."/");
-if(($uriCheck[count($uriCheck)-1] == "index.php" && $uriCheck[count($uriCheck)-2] == "") || $uriCheck[count($uriCheck)-2] == "views" ){
+
+if (($uriCheck[count($uriCheck)-1] == "index.php" && $uriCheck[count($uriCheck)-2] == "") || ($uriCheck[count($uriCheck)-2] == "views" && $uriCheck[count($uriCheck)-3] == "")) {
     $webRoot = "http://" .$serverName."/";
     define('SITE_URL', $webRoot);
-}else{
-$webRoot = "http://" . (substr($base, 0, $end+1)) . $projectFolderName . "/";
-define('SITE_URL', $webRoot);
+} else {
+    $webRoot = "http://" . (substr($base, 0, $end+1)) . $projectFolderName . "/";
+    define('SITE_URL', $webRoot);
 }
-
-//echo "<b>serverName</b>: ".$serverName."<br>";
-//echo "<b>uri</b>: ".$uri."<br>";
-//echo "<b>uriCheck</b>: ".$uriCheck[count($uriCheck)-2]."<br>";
-//echo "<b>uriCheck count</b>: ".count($uriCheck)."<br>";
-//echo "<b>base</b>: ".$base."<br>";
-//echo "<b>menuPathArray</b>: ".implode(" ", $menuPathArray)."<br>" ;
-//echo "<b>projectFolderName</b>: ".$projectFolderName."<br>";
-//echo "<b>end</b>: ".$end."<br>";
-//echo "<b>webRoot</b>: ".$webRoot."<br>";
 ?>
 
 
