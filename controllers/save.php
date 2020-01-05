@@ -2,6 +2,14 @@
 
 session_start();
 
+if ((isset($_SESSION['logged']) == FALSE) && ($_SESSION['logged'] == FALSE)) {
+    $message = "You need to <b>log in</b> in order to add new images to the collection.";
+        $_SESSION["promptMessage"] = $message;
+        $_SESSION["msg_type"] = "info";
+    header('Location: ../index.php');
+    exit();
+}
+
 $maxSize = 5000000;
 if($_FILES['file']['size'] > $maxSize) {
     $message = "file size is too large. The maximum file size is <b>".($maxSize/1000000)."MB</b>!";

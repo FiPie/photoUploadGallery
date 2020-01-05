@@ -73,8 +73,8 @@ session_start();
                                     gallery...
                                 </p>
 
-                                <div class="">
-                                    <div class="custom-file overflow-hidden rounded-pill mb-2">
+                                <div>
+                                    <div id="fileInputField" class="custom-file overflow-hidden rounded-pill mb-2">
                                         <input id="fileInput" type="file" name="file" class="custom-file-input rounded-pill">
                                         <label for="fileInput" class="custom-file-label rounded-pill">Choose file</label>
                                     </div>

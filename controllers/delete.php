@@ -2,6 +2,14 @@
 
 session_start();
 
+if ((isset($_SESSION['logged']) == FALSE) && ($_SESSION['logged'] == FALSE)) {
+    $message = "You need to <b>log in</b> in order to delete images from the collection.";
+        $_SESSION["promptMessage"] = $message;
+        $_SESSION["msg_type"] = "info";
+    header('Location: ../views/thumbnailGallery.php');
+    exit();
+}
+
 if (isset($_GET["del"]) && $_GET["del"] != '') {
     $file = filter_input(INPUT_GET, "del");
     if (file_exists("../images/$file")) {

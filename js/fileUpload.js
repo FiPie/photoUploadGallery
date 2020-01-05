@@ -1,7 +1,12 @@
 //Onload initial setup
 $(function () {
 
-
+    $('#fileInputField').on('click', function (){
+//        alert('click detected');
+        console.log('file input field click detected');
+        
+    })
+    
     $('#fileInput').on('change', function () {
         console.log('fileInput change detected');
         //get the file name

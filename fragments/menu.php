@@ -7,13 +7,23 @@ $menuPathArray = explode("/", __FILE__);
 $projectFolderName = $menuPathArray[count($menuPathArray) - 3];
 $end = strrpos($base, "/".$projectFolderName."/");
 
-if (($uriCheck[count($uriCheck)-1] == "index.php" && $uriCheck[count($uriCheck)-2] == "") || ($uriCheck[count($uriCheck)-2] == "views" && $uriCheck[count($uriCheck)-3] == "")) {
+if(($uriCheck[count($uriCheck)-1] == "index.php" && $uriCheck[count($uriCheck)-2] == "") || ($uriCheck[count($uriCheck)-2] == "views" && $uriCheck[count($uriCheck)-3] == "") ){
     $webRoot = "http://" .$serverName."/";
     define('SITE_URL', $webRoot);
-} else {
-    $webRoot = "http://" . (substr($base, 0, $end+1)) . $projectFolderName . "/";
-    define('SITE_URL', $webRoot);
+}else{
+$webRoot = "http://" . (substr($base, 0, $end+1)) . $projectFolderName . "/";
+define('SITE_URL', $webRoot);
 }
+
+//echo "<b>serverName</b>: ".$serverName."<br>";
+//echo "<b>uri</b>: ".$uri."<br>";
+//echo "<b>uriCheck</b>: ".$uriCheck[count($uriCheck)-2]."<br>";
+//echo "<b>uriCheck count</b>: ".count($uriCheck)."<br>";
+//echo "<b>base</b>: ".$base."<br>";
+//echo "<b>menuPathArray</b>: ".implode(" ", $menuPathArray)."<br>" ;
+//echo "<b>projectFolderName</b>: ".$projectFolderName."<br>";
+//echo "<b>end</b>: ".$end."<br>";
+//echo "<b>webRoot</b>: ".$webRoot."<br>";
 ?>
 
 
@@ -32,6 +42,33 @@ if (($uriCheck[count($uriCheck)-1] == "index.php" && $uriCheck[count($uriCheck)-
                     <!-- Here's the magic. Add the .animate and .slide-in classes to your .dropdown-menu and you're all set! -->
                     <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" id="link2" href="<?= SITE_URL . 'index.php' ?>">Homepage</a>
+                        
+                        
+                        <?php
+                        if ((isset($_SESSION['logged']) == TRUE) && ($_SESSION['logged'] == TRUE)) {
+                            $logged = TRUE;
+                        } elseif ((isset($_SESSION['logged']) == TRUE) && ($_SESSION['logged'] == FALSE)) {
+                            $logged = FALSE;
+                        } else {
+                            $logged = FALSE;
+                        }
+
+                        if ($logged == FALSE) {
+                            $login = SITE_URL . 'views/loginForm.php';
+                            echo "<a class='dropdown-item' id='link6' href='$login'>Login</a>";
+                        } else {
+                            $logout = SITE_URL . 'controllers/logoutHandler.php';
+                            echo "<a class='dropdown-item' id='link7' href='$logout'>Logout</a>";
+                        }
+                        ?>
+                        
+                        
+                      
+                        
+                        
+                        
+                        
+                        
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" id="link3" href="<?= SITE_URL . 'views/thumbnailGallery.php' ?>">Gallery</a>
                         <a class="dropdown-item" id="link4" href="<?= SITE_URL . 'views/show.php' ?>">Slider</a>
