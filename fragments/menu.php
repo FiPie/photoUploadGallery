@@ -1,18 +1,18 @@
 <?php
-$serverName = $_SERVER['SERVER_NAME'];
-$uri = $_SERVER['REQUEST_URI'];
-$base = $serverName . $uri;
-$uriCheck= explode("/", $uri);
-$menuPathArray = explode("/", __FILE__);
-$projectFolderName = $menuPathArray[count($menuPathArray) - 3];
-$end = strrpos($base, "/".$projectFolderName."/");
+$serverName = $_SERVER['SERVER_NAME'];                          // localhost
+$uri = $_SERVER['REQUEST_URI'];                                 // /~userName/photoUploadGallery/index.php
+$base = $serverName . $uri;                                     // localhost/~userName/photoUploadGallery/index.php
+$uriCheck = explode("/", $uri);                                 // photoUploadGallery
+$menuPathArray = explode("/", __FILE__);                        // home userNameFolder public_html photoUploadGallery fragments menu.php
+$projectFolderName = $menuPathArray[count($menuPathArray) - 3]; // photoUploadGallery
+$end = strrpos($base, "/" . $projectFolderName . "/");          // index ex. 19
 
-if(($uriCheck[count($uriCheck)-1] == "index.php" && $uriCheck[count($uriCheck)-2] == "") || ($uriCheck[count($uriCheck)-2] == "views" && $uriCheck[count($uriCheck)-3] == "") ){
-    $webRoot = "http://" .$serverName."/";
+if (($uriCheck[count($uriCheck) - 1] == "index.php" && $uriCheck[count($uriCheck) - 2] == "") || ($uriCheck[count($uriCheck) - 2] == "views" && $uriCheck[count($uriCheck) - 3] == "")) {
+    $webRoot = "http://" . $serverName . "/";
     define('SITE_URL', $webRoot);
-}else{
-$webRoot = "http://" . (substr($base, 0, $end+1)) . $projectFolderName . "/";
-define('SITE_URL', $webRoot);
+} else {
+    $webRoot = "http://" . (substr($base, 0, $end + 1)) . $projectFolderName . "/";
+    define('SITE_URL', $webRoot);
 }
 
 //echo "<b>serverName</b>: ".$serverName."<br>";
@@ -42,8 +42,7 @@ define('SITE_URL', $webRoot);
                     <!-- Here's the magic. Add the .animate and .slide-in classes to your .dropdown-menu and you're all set! -->
                     <div class="dropdown-menu dropdown-menu-right animate slideIn" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" id="link2" href="<?= SITE_URL . 'index.php' ?>">Homepage</a>
-                        
-                        
+
                         <?php
                         if ((isset($_SESSION['logged']) == TRUE) && ($_SESSION['logged'] == TRUE)) {
                             $logged = TRUE;
@@ -61,14 +60,7 @@ define('SITE_URL', $webRoot);
                             echo "<a class='dropdown-item' id='link7' href='$logout'>Logout</a>";
                         }
                         ?>
-                        
-                        
-                      
-                        
-                        
-                        
-                        
-                        
+
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" id="link3" href="<?= SITE_URL . 'views/thumbnailGallery.php' ?>">Gallery</a>
                         <a class="dropdown-item" id="link4" href="<?= SITE_URL . 'views/show.php' ?>">Slider</a>

@@ -104,6 +104,5 @@ session_start();
         <?php include "fragments/footer.php"; ?>
         <script src="js/fileUpload.js"></script>
 
-<!--        <script src="js/menu.js"  type="text/javascript" charset="utf-8"></script>-->
     </body>
 </html>

@@ -23,19 +23,17 @@ session_start();
             <?php include "../fragments/menu.php"; ?>
             <div class="container">
                 <div class="row mt-1 px-5 text-center" style="max-height: 30px">
-                        <div id="message" class="col-sm-10 py-3 mb-5 mx-auto alert alert-<?= $_SESSION['msg_type'] ?>">
-                            <?php
-                            
-
-                            if (isset($_SESSION["promptMessage"])) {
-                                echo $_SESSION["promptMessage"];
-                                echo ("<button class='close' onclick='cleanMsg(`" . $_SESSION['msg_type'] . "`)'><span>&times;</span></button>");
-                            }
-                            unset($_SESSION["promptMessage"]);
-                            unset($_SESSION["msg_type"]);
-                            ?>
-                        </div>
+                    <div id="message" class="col-sm-10 py-3 mb-5 mx-auto alert alert-<?= $_SESSION['msg_type'] ?>">
+                        <?php
+                        if (isset($_SESSION["promptMessage"])) {
+                            echo $_SESSION["promptMessage"];
+                            echo ("<button class='close' onclick='cleanMsg(`" . $_SESSION['msg_type'] . "`)'><span>&times;</span></button>");
+                        }
+                        unset($_SESSION["promptMessage"]);
+                        unset($_SESSION["msg_type"]);
+                        ?>
                     </div>
+                </div>
                 <!-- Insert/Drop Grid Row codes below -->
 
                 <div class="row justify-content-center"> 
@@ -52,10 +50,10 @@ session_start();
                             <label>Login</label>
                             <input class="btn btn-primary form-control" type="submit" value="Login">
                         </div>
-                        
+
                     </form>
                 </div>
-                
+
             </div>
         </div>
         <?php include "../fragments/footer.php"; ?>
